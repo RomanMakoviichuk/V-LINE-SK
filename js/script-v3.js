@@ -145,7 +145,7 @@ function handleRadioButtonChange(radioButton) {
 
   totalOldPrice.textContent = formatPrice(oldPrice);
   totalNewPrice.textContent = formatPrice(actualPrice);
-  totalDiscount.textContent = 'spasiti ' + formatPrice((oldPrice - actualPrice));
+  totalDiscount.textContent = 'uložiť ' + formatPrice((oldPrice - actualPrice));
 
 
   // update link for selected package
