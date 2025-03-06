@@ -122,27 +122,19 @@ let addToCartLink = document.getElementById('addToCartLink'); // add to cart btn
 let radioButtons = document.querySelectorAll('input[type="radio"]'); // get all radio inputs
 
 // get all total elements
-let totalOldPrice = document.querySelector(".total-old-price");
-let totalNewPrice = document.querySelector(".total-actual-price");
-let totalDiscount = document.querySelector(".total-discount");
+let totalOldPrice = document.querySelector('.total-old-price');
+let totalNewPrice = document.querySelector('.total-actual-price');
+let totalDiscount = document.querySelector('.total-discount');
 
 // get price from input
 function getPrice(element, className) {
-  const priceText = element.querySelector(className).textContent
-      .replace(/\s/g, '')
-      .replace(/[^\d,]/g, '')
-      .replace(",", "");
-  return parseInt(priceText) || 0;
+  const priceText = element.querySelector(className).textContent;
+  return parseFloat(priceText.replace('€', '').replace(',', '.'));
 }
-
 
 // formating price to neccessary format
 function formatPrice(price) {
-  let priceStr = price.toString();
-  if (price >= 1000) {
-    priceStr = priceStr.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
-  return priceStr + " KČ";
+  return '€' + price.toFixed(2).replace('.', ',');
 }
 
 function handleRadioButtonChange(radioButton) {
@@ -150,9 +142,10 @@ function handleRadioButtonChange(radioButton) {
   let actualPrice = getPrice(radioButton.parentElement, '.package-actual-price');
   let oldPrice = getPrice(radioButton.parentElement, '.package-old-price');
 
+
   totalOldPrice.textContent = formatPrice(oldPrice);
   totalNewPrice.textContent = formatPrice(actualPrice);
-  totalDiscount.textContent = 'ušetřite ' + formatPrice(oldPrice - actualPrice);
+  totalDiscount.textContent = 'spasiti ' + formatPrice((oldPrice - actualPrice));
 
 
   // update link for selected package
@@ -180,7 +173,6 @@ function handleRadioButtonChange(radioButton) {
 radioButtons.forEach(radioButton => {
   radioButton.addEventListener('change', () => handleRadioButtonChange(radioButton));
 });
-
 
 
 /* FIXED BUY BTN */
